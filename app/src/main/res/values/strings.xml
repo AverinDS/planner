@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string-array name="doing">
+        <item>Купить хлеб</item>
+        <item>Зайти к начальнику</item>
+        <item>Отослать е-майл Сидоровой</item>
+        <item>Погуглить про андроид</item>
+        <item>Сдать курсач</item>
+        <item>Сдать лабу</item>
+        <item>Купить коту пожрать</item>
+        <item>Покормить кота</item>
+        <item>Покормить попугая</item>
+        <item>Покормить сома</item>
+        <item>Полить цветы</item>
+        <item>Сделать ещё что-то, чтобы видно было прокрутку</item>
+    </string-array>
 </resources>
