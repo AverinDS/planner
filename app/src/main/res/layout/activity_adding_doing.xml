@@ -30,7 +30,8 @@
                 android:id="@+id/editText"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:text="Введите название..."/>
+                android:text="Введите название..."
+                android:onClick="onTapEditText"/>
 
             <TimePicker
                 android:layout_width="match_parent"
