@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".dayActivity" />
-        <activity android:name=".addingDoingActivity"></activity>
+        <activity android:name=".addingDoingActivity" />
+        <activity android:name=".checkDB"></activity>
     </application>
 
 </manifest>

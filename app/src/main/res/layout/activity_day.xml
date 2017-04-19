@@ -24,6 +24,16 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
+        android:id="@+id/buttonAddDoing"
         android:onClick="onClickAdd_doing"/>
+
+    <Button
+        android:id="@+id/buttonCheckDatabase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Check Database"
+         android:onClick="onClickCheckDB"/>
+
 </RelativeLayout>
