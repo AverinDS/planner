@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.dmitry.myapplication.checkDB">
 
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="10dp"
+        android:minWidth="10dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        />
 </android.support.constraint.ConstraintLayout>

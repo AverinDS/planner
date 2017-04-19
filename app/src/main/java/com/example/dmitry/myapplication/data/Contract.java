@@ -14,7 +14,7 @@ public class Contract {
 
     public static final class doing implements BaseColumns
     {
-        public static final  String DATABASE_NAME = "do";
+        public static final  String TABLE_NAME = "do";
 
         public static final String _ID = BaseColumns._ID;
         public static final String DATE = "date";
