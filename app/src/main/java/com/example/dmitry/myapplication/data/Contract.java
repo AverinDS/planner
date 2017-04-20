@@ -17,7 +17,7 @@ public class Contract {
         public static final  String TABLE_NAME = "do";
 
         public static final String _ID = BaseColumns._ID;
-        public static final String DATE = "date";
+        public static final String DATE_OF_EXE = "dateOfExec";
         public static final String TIME = "time";
         public static final String DOING = "doing";
 

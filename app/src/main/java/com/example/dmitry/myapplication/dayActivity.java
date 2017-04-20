@@ -39,6 +39,8 @@ public class dayActivity extends AppCompatActivity {
 
     public void onClickCheckDB(View v)
     {
+        Intent intent = new Intent(this, checkDB.class);
+        startActivity(intent);
 
     }
 

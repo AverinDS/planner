@@ -25,9 +25,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_TABLE = "CREATE TABLE "+ Contract.doing.TABLE_NAME+ " ("
                 + Contract.doing._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Contract.doing.DATE + "TEXT NOT NULL, "
-                + Contract.doing.TIME + "TEXT NOT NULL, "
-                + Contract.doing.DOING + "TEXT NOT NULL;";
+                + Contract.doing.DATE_OF_EXE  + " TEXT NOT NULL, "
+                + Contract.doing.TIME + " TEXT NOT NULL, "
+                + Contract.doing.DOING + " TEXT NOT NULL);";
 
         db.execSQL(SQL_CREATE_TABLE);
 
@@ -35,6 +35,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE "+ Contract.doing.TABLE_NAME);
+        onCreate(db);
 
     }
 }
