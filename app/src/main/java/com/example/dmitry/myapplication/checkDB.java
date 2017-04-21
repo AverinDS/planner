@@ -22,10 +22,10 @@ public class checkDB extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try {
 
-            mDbHelper = new DbHelper(this, Contract.doing.TABLE_NAME, null, 1);//создание таблицы
+            mDbHelper = new DbHelper(this, Contract.doing.TABLE_NAME, null, Contract.DATABASE_VERSION);//создание таблицы
             setContentView(R.layout.activity_check_db);
             editText = (TextView) findViewById(R.id.editText4);
-            insertDefault();
+            //insertDefault();
             displayDatabaseInfo();
         }
         catch (Exception ex) {
@@ -34,15 +34,16 @@ public class checkDB extends AppCompatActivity {
         }
     }
 
+    //get all rows from database
     public void displayDatabaseInfo(){
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         //String path = this.getDatabasePath("do").getAbsolutePath();
         //Condition of getting
-        String[] projection = {
-                Contract.doing._ID,
-                Contract.doing.DATE_OF_EXE ,
-                Contract.doing.TIME,
-                Contract.doing.DOING};
+//        String[] projection = {
+//                Contract.doing._ID,
+//                Contract.doing.DATE_OF_EXE ,
+//                Contract.doing.TIME,
+//                Contract.doing.DOING};
 
         //make query
         String query = "SELECT * FROM "+Contract.doing.TABLE_NAME;
@@ -85,18 +86,18 @@ public class checkDB extends AppCompatActivity {
         }
     }
 
-    public void insertDefault()
+    public void insertDefault()//method for checking inserting of database
     {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Contract.doing.DATE_OF_EXE , "15.02.2012");
+        values.put(Contract.doing.DATE_OF_EXE , "22.3.2017");
         values.put(Contract.doing.TIME, "15:00");
-        values.put(Contract.doing.DOING, "настройка БД успешна");
+        values.put(Contract.doing.DOING, "!!!!настройка БД успешна");
         long i = db.insert(Contract.doing.TABLE_NAME,null,values);
         //db.close();
         String query = "INSERT INTO "+ Contract.doing.TABLE_NAME +
                 " ("+ Contract.doing.DATE_OF_EXE +", "+Contract.doing.TIME+", "+Contract.doing.DOING+")"+
-                " VALUES('15.02.2012', '15:00', 'настройка БД успешна');";
+                " VALUES('22.3.2017', '16:00', '!!!!настройка БД успешна');";
         db.execSQL(query);
     }
 }

@@ -12,6 +12,8 @@ import java.util.Date;
 
 public class Contract {
 
+    public static  final int DATABASE_VERSION = 1;
+
     public static final class doing implements BaseColumns
     {
         public static final  String TABLE_NAME = "do";
