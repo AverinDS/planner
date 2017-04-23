@@ -98,6 +98,9 @@ public class dayActivity extends AppCompatActivity {
                 ///delete with image info
                 Toast t = Toast.makeText(this,mDbHelper.deleteFromDb(date,row.substring(0,5),row.substring(6, row.length())), Toast.LENGTH_SHORT);
                 t.show();
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                        mDbHelper.getTimeDoing(Contract.doing.DATE_OF_EXE + " = '" + date+"'"));
+                list.setAdapter(adapter);
                 return true;
             }
             default:
