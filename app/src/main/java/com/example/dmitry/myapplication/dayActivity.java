@@ -3,7 +3,12 @@ package com.example.dmitry.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.MenuItemHoverListener;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -16,11 +21,8 @@ import com.example.dmitry.myapplication.data.DbHelper;
 public class dayActivity extends AppCompatActivity {
 
     ListView list;
-    TimePicker timePicker;
     EditText editText;
     DbHelper mDbHelper;
-    int hour = -1;
-    int minutes = -1;
     String date;
 
     @Override
@@ -29,34 +31,13 @@ public class dayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_day);
 
         list = (ListView)findViewById(R.id.listDoing);
-        //timePicker = (TimePicker)findViewById(R.id.timePicker);
         editText = (EditText)findViewById(R.id.editText);
+        mDbHelper = new DbHelper(this, Contract.doing.TABLE_NAME,null, Contract.DATABASE_VERSION) ;
+
         Intent intent = getIntent();
         date = intent.getStringExtra("date");
 
-        mDbHelper = new DbHelper(this, Contract.doing.TABLE_NAME,null, Contract.DATABASE_VERSION) ;
-
-
-//        try {
-//            timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-//                @Override
-//                public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-//                    hour = hourOfDay;
-//                    minutes = minute;
-//                }
-//
-//            });
-//        }
-//        catch (Exception ex)
-//        {
-//            Toast t = Toast.makeText(this,ex.getMessage(),Toast.LENGTH_LONG);
-//            t.show();
-//        }
-
-
-        //adding default information in list
-        //final String[] list_do = getResources().getStringArray(R.array.doing);
-
+        registerForContextMenu(list);//register context menu for listView
 
         //adding information from database
         try {
@@ -71,10 +52,64 @@ public class dayActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
 
+        try {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                    mDbHelper.getTimeDoing(Contract.doing.DATE_OF_EXE + " = '" + date+"'"));
+            list.setAdapter(adapter);
+        }
+        catch (Exception ex) {
+            Toast t = Toast.makeText(this, ex.getMessage(),Toast.LENGTH_LONG);
+            t.show();
+        }
+
+    }
+
+    @Override
+    public  void  onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu,v,menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contex_menu, menu);
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info =(AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId())
+        {
+            case R.id.edit:
+            {
+                ///edit
+                Toast t = Toast.makeText(this,"EDIT", Toast.LENGTH_SHORT);
+                t.show();
+                return true;
+            }
+            case  R.id.delete:
+            {
+                String row = list.getItemAtPosition(info.position).toString();
+
+                ///delete with image info
+                Toast t = Toast.makeText(this,mDbHelper.deleteFromDb(date,row.substring(0,5),row.substring(6, row.length())), Toast.LENGTH_SHORT);
+                t.show();
+                return true;
+            }
+            default:
+            {
+                return  super.onContextItemSelected(item);
+            }
+        }
+    }
     public void onClickAdd_doing(View v)
     {
         Intent intent = new Intent(this,addingDoingActivity.class);
+        intent.putExtra("date", date);
         startActivity(intent);
     }
 
@@ -85,10 +120,7 @@ public class dayActivity extends AppCompatActivity {
 
     }
 
-    public void addingInDB()
-    {
 
-    }
 
 
 }

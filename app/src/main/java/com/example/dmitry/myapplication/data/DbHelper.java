@@ -98,9 +98,9 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             String query = "DELETE FROM " + Contract.doing.TABLE_NAME +
-                    " WHERE " + Contract.doing.DATE_OF_EXE + " = " + date + " AND " +
-                    Contract.doing.TIME + " = " + time + " AND " +
-                    Contract.doing.DOING + " = " + doing + ";";
+                    " WHERE " + Contract.doing.DATE_OF_EXE + " = '" + date + "' AND " +
+                    Contract.doing.TIME + " = '" + time + "' AND " +
+                    Contract.doing.DOING + " = '" + doing + "';";
             db.execSQL(query);
             return "Успешно удалено!";
         }
