@@ -32,6 +32,8 @@ public class addingDoingActivity extends AppCompatActivity {
 
         // /установка 24-часового формата
         time.setIs24HourView(true);
+        time.setCurrentHour(00);
+        time.setCurrentMinute(00);
 
         Intent intent = getIntent();
         date = intent.getStringExtra("date");
