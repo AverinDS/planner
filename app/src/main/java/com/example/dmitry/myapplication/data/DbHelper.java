@@ -115,9 +115,9 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             String query = "UPDATE " + Contract.doing.TABLE_NAME + " SET " +
-                    Contract.doing.TIME + " = " + newTime + ", " +
-                    Contract.doing.DOING + " = " + newDoing + ", " +
-                    "WHERE " + Contract.doing.TIME + " = " + oldTime + " AND " + Contract.doing.DOING + " = " + oldDoing;
+                    Contract.doing.TIME + " = '" + newTime + "', " +
+                    Contract.doing.DOING + " = '" + newDoing + "' " +
+                    "WHERE " + Contract.doing.TIME + " = '" + oldTime + "' AND " + Contract.doing.DOING + " = '" + oldDoing+"';";
             db.execSQL(query);
             return "Успешно изменено!";
         }

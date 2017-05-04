@@ -89,6 +89,16 @@ public class dayActivity extends AppCompatActivity {
                 ///edit
                 Toast t = Toast.makeText(this,"EDIT", Toast.LENGTH_SHORT);
                 t.show();
+                String[] rows = mDbHelper.getTimeDoing(Contract.doing.DATE_OF_EXE + " = '" + date+"'");
+                String row = rows[info.position];//get needed row
+                String time = row.substring(0, row.indexOf(' '));
+                String doing = row.substring(row.indexOf(' ')+1, row.length());
+                Intent intent = new Intent(this, addingDoingActivity.class);
+                intent.putExtra("time", time);
+                intent.putExtra("doing", doing);
+                intent.putExtra("date", date);
+                startActivity(intent);
+
                 return true;
             }
             case  R.id.delete:
