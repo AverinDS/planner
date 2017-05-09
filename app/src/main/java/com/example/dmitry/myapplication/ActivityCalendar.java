@@ -1,37 +1,76 @@
 package com.example.dmitry.myapplication;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
-public class ActivityCalendar extends AppCompatActivity {
+import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
+public class ActivityCalendar extends ActionBarActivity {
 
     DatePicker datePicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
-        //CalendarView calendar = (CalendarView)findViewById(R.id.calendarView);
-       // calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//            @Override
-//            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-//                date = dayOfMonth+"."+ month+"."+year;
-//            }
-//        });
 
-        //i = calendar.getDate();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_calendar);
+
         datePicker = (DatePicker)findViewById(R.id.datePicker1);
         datePicker.getDayOfMonth();
         datePicker.getMonth();
         datePicker.getYear();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //navDrawer
+        new Drawer()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withActionBarDrawerToggle(true)
+                .withHeader(R.layout.drawer_header)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_calendar).withIcon(FontAwesome.Icon.faw_calendar),
+                        new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_android)
+
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                        switch (position){
+                            case 1:{
+                                drawMessage("Вы уже здесь");
+                                break;
+                            }
+                            case 2:
+                            {
+                                drawMessage("активити настроек");
+                            }
+                        }
+                    }
+                })
+                .build();
     }
 
     String date;long i;
@@ -41,7 +80,7 @@ public class ActivityCalendar extends AppCompatActivity {
 
 
         Intent intent = new Intent(this, dayActivity.class);
-       // date = String.valueOf(i);
+
 
         try {
             intent.putExtra("date", date);
@@ -50,5 +89,11 @@ public class ActivityCalendar extends AppCompatActivity {
         catch (Exception ex) {
         ex.getMessage();
         }
+    }
+
+    public void drawMessage(String message)
+    {
+        Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        t.show();
     }
 }
