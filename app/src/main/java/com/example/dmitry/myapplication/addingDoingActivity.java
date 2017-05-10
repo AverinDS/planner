@@ -3,7 +3,9 @@ package com.example.dmitry.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -11,6 +13,11 @@ import android.widget.Toast;
 
 import com.example.dmitry.myapplication.data.Contract;
 import com.example.dmitry.myapplication.data.DbHelper;
+import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class addingDoingActivity extends AppCompatActivity {
 
@@ -94,6 +101,38 @@ public class addingDoingActivity extends AppCompatActivity {
         });
 
 
+    ////
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //navDrawer
+        new Drawer()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withActionBarDrawerToggle(true)
+                .withHeader(R.layout.drawer_header)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_calendar).withIcon(FontAwesome.Icon.faw_calendar),
+                        new SecondaryDrawerItem().withName(R.string.action_settings).withIcon(FontAwesome.Icon.faw_android)
+
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                        switch (position){
+                            case 1:{
+                                drawMessage("Вы уже здесь");
+                                break;
+                            }
+                            case 2:
+                            {
+                                goToSetting();
+                            }
+                        }
+                    }
+                })
+                .build();
 
     }
 
@@ -158,6 +197,17 @@ public class addingDoingActivity extends AppCompatActivity {
         }
 
 
+    }
+    public void drawMessage(String message)
+    {
+        Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+    public void goToSetting()
+    {
+        Intent intent = new Intent(this, setting.class);
+        startActivity(intent);
     }
 
 }
