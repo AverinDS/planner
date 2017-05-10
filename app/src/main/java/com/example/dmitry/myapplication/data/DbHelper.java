@@ -46,7 +46,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "SELECT * FROM "+ Contract.doing.TABLE_NAME;
-        if(conditionOfChoose != "") query+= " WHERE "+ conditionOfChoose+";";
+        if(conditionOfChoose != "") query+= " WHERE "+ conditionOfChoose+" ORDER BY "+ Contract.doing.TIME+";";
 
 
             Cursor cursor = db.rawQuery(query, null);

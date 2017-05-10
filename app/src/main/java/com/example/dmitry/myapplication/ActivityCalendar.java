@@ -65,7 +65,7 @@ public class ActivityCalendar extends ActionBarActivity {
                             }
                             case 2:
                             {
-                                drawMessage("активити настроек");
+                               goToSetting();
                             }
                         }
                     }
@@ -95,5 +95,11 @@ public class ActivityCalendar extends ActionBarActivity {
     {
         Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         t.show();
+    }
+
+    public void goToSetting()
+    {
+        Intent intent = new Intent(this, setting.class);
+        startActivity(intent);
     }
 }

@@ -1,55 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dmitry.myapplication.setting">
+    tools:context="com.example.dmitry.myapplication.setting"
+    android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="63dp"
         android:layout_height="wrap_content"
-        android:text="Тема"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_marginTop="100dp"
         android:ems="10"
-        android:textSize="24dp"
+        android:text="Тема:"
+        android:textAlignment="center"
+        android:textSize="20dp" />
 
-        tools:layout_editor_absoluteY="171dp"
-        tools:layout_editor_absoluteX="37dp" />
-
-    <RadioButton
-        android:id="@+id/radioButton"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RadioButton"
-        tools:layout_editor_absoluteY="90dp"
-        tools:layout_editor_absoluteX="138dp" />
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
 
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RadioButton"
-        tools:layout_editor_absoluteY="122dp"
-        tools:layout_editor_absoluteX="138dp" />
+        <RadioButton
+            android:id="@+id/radioButtonLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Светлая" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="Тема"
-        android:textSize="24dp"
+        <RadioButton
+            android:id="@+id/radioButtonDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Тёмная" />
+    </RadioGroup>
 
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="25dp" />
+
+
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox"
-        tools:layout_editor_absoluteY="221dp"
-        tools:layout_editor_absoluteX="145dp" />
+        android:text="Показывать уведомления"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
