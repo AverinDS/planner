@@ -19,7 +19,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-public class addingDoingActivity extends AppCompatActivity {
+public class AddingDoingActivity extends AppCompatActivity {
 
     TimePicker time;
     EditText text;
@@ -122,7 +122,7 @@ public class addingDoingActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position){
                             case 1:{
-                                drawMessage("Вы уже здесь");
+                                goToCalendar();
                                 break;
                             }
                             case 2:
@@ -206,7 +206,12 @@ public class addingDoingActivity extends AppCompatActivity {
 
     public void goToSetting()
     {
-        Intent intent = new Intent(this, setting.class);
+        Intent intent = new Intent(this, AboutUs.class);
+        startActivity(intent);
+    }
+    public void goToCalendar()
+    {
+        Intent intent = new Intent(this, ActivityCalendar.class);
         startActivity(intent);
     }
 

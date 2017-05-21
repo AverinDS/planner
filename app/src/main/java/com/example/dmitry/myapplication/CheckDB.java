@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.dmitry.myapplication.data.Contract;
 import com.example.dmitry.myapplication.data.DbHelper;
 
-public class checkDB extends AppCompatActivity {
+public class CheckDB extends AppCompatActivity {
 
     TextView editText;
     private DbHelper mDbHelper;

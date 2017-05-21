@@ -15,10 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dayActivity" />
-        <activity android:name=".addingDoingActivity" />
-        <activity android:name=".checkDB" />
-        <activity android:name=".setting"></activity>
+        <activity android:name=".DayActivity" />
+        <activity android:name=".AddingDoingActivity" />
+        <activity android:name=".CheckDB" />
+        <activity android:name=".AboutUs"></activity>
     </application>
 
 </manifest>

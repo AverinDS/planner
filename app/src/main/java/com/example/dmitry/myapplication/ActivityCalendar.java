@@ -2,27 +2,18 @@ package com.example.dmitry.myapplication;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class ActivityCalendar extends ActionBarActivity {
@@ -79,7 +70,7 @@ public class ActivityCalendar extends ActionBarActivity {
         date = String.valueOf(datePicker.getDayOfMonth()+ "."+datePicker.getMonth()+"."+datePicker.getYear());
 
 
-        Intent intent = new Intent(this, dayActivity.class);
+        Intent intent = new Intent(this, DayActivity.class);
 
 
         try {
@@ -99,7 +90,7 @@ public class ActivityCalendar extends ActionBarActivity {
 
     public void goToSetting()
     {
-        Intent intent = new Intent(this, setting.class);
+        Intent intent = new Intent(this, AboutUs.class);
         startActivity(intent);
     }
 }

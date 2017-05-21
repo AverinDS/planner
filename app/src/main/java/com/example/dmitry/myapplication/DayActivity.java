@@ -1,9 +1,13 @@
 package com.example.dmitry.myapplication;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.MenuItemHoverListener;
+
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -13,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.dmitry.myapplication.data.Contract;
@@ -24,12 +27,13 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-public class dayActivity extends AppCompatActivity {
+public class DayActivity extends AppCompatActivity {
 
     ListView list;
     EditText editText;
     DbHelper mDbHelper;
     String date;
+    private static final  int ID_NOTIFY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,7 @@ public class dayActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         switch (position){
                             case 1:{
-                                drawMessage("Вы уже здесь");
+                                goToCalendar();
                                 break;
                             }
                             case 2:
@@ -133,7 +137,7 @@ public class dayActivity extends AppCompatActivity {
                 String row = rows[info.position];//get needed row
                 String time = row.substring(0, row.indexOf(' '));
                 String doing = row.substring(row.indexOf(' ')+1, row.length());
-                Intent intent = new Intent(this, addingDoingActivity.class);
+                Intent intent = new Intent(this, AddingDoingActivity.class);
                 intent.putExtra("time", time);
                 intent.putExtra("doing", doing);
                 intent.putExtra("date", date);
@@ -161,14 +165,14 @@ public class dayActivity extends AppCompatActivity {
     }
     public void onClickAdd_doing(View v)
     {
-        Intent intent = new Intent(this,addingDoingActivity.class);
+        Intent intent = new Intent(this,AddingDoingActivity.class);
         intent.putExtra("date", date);
         startActivity(intent);
     }
 
     public void onClickCheckDB(View v)
     {
-        Intent intent = new Intent(this, checkDB.class);
+        Intent intent = new Intent(this, CheckDB.class);
         startActivity(intent);
 
     }
@@ -181,8 +185,70 @@ public class dayActivity extends AppCompatActivity {
 
     public void goToSetting()
     {
-        Intent intent = new Intent(this, setting.class);
+        Intent intent = new Intent(this, AboutUs.class);
         startActivity(intent);
+    }
+    public void goToCalendar()
+    {
+        Intent intent = new Intent(this, ActivityCalendar.class);
+        startActivity(intent);
+    }
+
+    public void onClickMakeNotify(View v)
+    {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Намерение для запуска второй активности
+        Intent intent = new Intent(this, this.getClass());
+        intent.putExtra("date", date);
+        //PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        //Строим нормальную дату
+        String dateCopy = date;
+        String dateNormal = "";
+        //день
+        if (Integer.parseInt(dateCopy.substring(0, dateCopy.indexOf('.'))) < 10)
+        {
+            dateNormal += "0";
+        }
+
+        dateNormal += dateCopy.substring(0, dateCopy.indexOf('.')+1);
+        dateCopy = dateCopy.substring(dateCopy.indexOf('.')+1, dateCopy.length());
+
+        //месяц
+        if (Integer.parseInt(dateCopy.substring(0, dateCopy.indexOf('.'))) < 9)
+        {
+            dateNormal += "0";
+        }
+            int mounth = Integer.parseInt(dateCopy.substring(0, dateCopy.indexOf('.')));
+            mounth++;
+            dateNormal += String.valueOf(mounth);
+
+        dateCopy = dateCopy.substring(dateCopy.indexOf('.'), dateCopy.length());
+        //год
+        dateNormal+=dateCopy;
+
+
+
+
+        // Строим уведомление
+        Notification builder = new Notification.Builder(this)
+                .setTicker("Новая закладка")
+                .setContentTitle("Закладка")
+                .setContentText("Вы сделали закладку на "+ dateNormal)
+                .setSmallIcon(R.drawable.ic_launcher).setContentIntent(pIntent)
+                .build();
+
+        // убираем уведомление, когда его выбрали
+        builder.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(ID_NOTIFY, builder);
+
+
+
+
+
+
     }
 
 
