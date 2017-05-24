@@ -12,9 +12,6 @@ import android.widget.Toast;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private static  final  String LOG_TAG = DbHelper.class.getSimpleName();//what is this var?
-    private static final String DATABASE_NAME = "database.db";
-   // private static final int DATABASE_VERSION = 1;
 
 
     public DbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

@@ -177,11 +177,7 @@ public class DayActivity extends AppCompatActivity {
 
     }
 
-    public void drawMessage(String message)
-    {
-        Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        t.show();
-    }
+
 
     public void goToSetting()
     {
@@ -244,14 +240,6 @@ public class DayActivity extends AppCompatActivity {
 
         notificationManager.notify(ID_NOTIFY, builder);
 
-
-
-
-
-
     }
-
-
-
 
 }

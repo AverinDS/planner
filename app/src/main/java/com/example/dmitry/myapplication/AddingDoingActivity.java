@@ -30,8 +30,7 @@ public class AddingDoingActivity extends AppCompatActivity {
     int hour = 0;
     int minutes= 0;
     String valText ="";
-    String doing ="";
-    String EmptyLine = "";
+
 
 
     @Override
@@ -198,11 +197,7 @@ public class AddingDoingActivity extends AppCompatActivity {
 
 
     }
-    public void drawMessage(String message)
-    {
-        Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        t.show();
-    }
+
 
     public void goToSetting()
     {
